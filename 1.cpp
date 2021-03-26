@@ -27,25 +27,25 @@ cout << "x0= " << x0 << " x1= " << x1 << " ";
 do {
 x = (left + right) / 2;
 f = func(x);
-if (f < 0) right = x;
+if (f < 0) right = x;//func(left)*func(x)<0
 else left = x;
 iter++;
-} while (fabs(f) > eps && iter<20000);
+} while (fabs(f) > eps && iter<20000);//abs(func(left)-func(right))>=0 или abs(left-right)>=0
 cout << iter << " iterations" << endl;
 return x;
 }
 
 double find2(double x0, double x1, double eps)
 {
-double rez = x1, f0, f;
+double rez = x1, f0, f;//правильно выбрать x0 - неподвижную точку, и x1 как подвижную
 int iter = 0;
 cout << "x0= " << x0 << " x1= " << x1 << " ";
 do {
-f = sin(rez)+sin(2.0*rez);
-f0 = sin(x0)+sin(2.0*x0);
-rez = rez - f / (f - f0)*(rez - x0);
+f = sin(rez)+sin(2.0*rez);//func(rez)
+f0 = sin(x0)+sin(2.0*x0);//func(x0)
+rez = rez - f *(rez - x0)/ (f - f0); //поменяла положение скобок
 iter++;
-} while (fabs(f) > eps && iter<20000);
+} while (fabs(f) > eps && iter<20000);//ладно
 cout << iter << " iterations" << endl;
 return rez;
 }
@@ -59,7 +59,7 @@ f = func(x);
 df1 = df(x);
 x = x - f / df1;
 iter++;
-} while (fabs(f) > eps && iter<20000);
+} while (fabs(f) > eps && iter<20000);//ладно
 cout << iter << " iterations" << endl;
 return x;
 }
