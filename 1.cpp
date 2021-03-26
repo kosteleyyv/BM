@@ -27,10 +27,10 @@ cout << "x0= " << x0 << " x1= " << x1 << " ";
 do {
 x = (left + right) / 2;
 f = func(x);
-if (f < 0) right = x;
+if (f < 0) right = x;//func(left)*f<0
 else left = x;
 iter++;
-} while (fabs(f) > eps && iter<20000);
+} while (fabs(f) > eps && iter<20000);//abs(f(left)-f(right))>eps abs(left-right)>eps
 cout << iter << " iterations" << endl;
 return x;
 }
@@ -41,11 +41,11 @@ double rez = x1, f0, f;
 int iter = 0;
 cout << "x0= " << x0 << " x1= " << x1 << " ";
 do {
-f = sin(rez)+sin(2.0*rez);
-f0 = sin(x0)+sin(2.0*x0);
-rez = rez - f / (f - f0)*(rez - x0);
+f = sin(rez)+sin(2.0*rez);//func(rez)
+f0 = sin(x0)+sin(2.0*x0);//func(x0)
+rez = rez - f *(rez - x0) / (f - f0); //поменяла положение выражения в скобках
 iter++;
-} while (fabs(f) > eps && iter<20000);
+} while (fabs(f) > eps && iter<20000);//рассмотреть возможность заменить условие, как в find1
 cout << iter << " iterations" << endl;
 return rez;
 }
@@ -68,6 +68,6 @@ int main()
 {
 // cout << find2(1.0, 2.5, 0.000001);
 //cin.get(); return 0;
-cout << find3(2, 0.000001);
+cout << find3(2, 0.000001);// вполне хватит и 0.001
 cin.get(); return 0;
 }
